@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#081b35">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Calculadora gratuita de inteligência artificial: compare capacidade, custo por tarefa e estime seu orçamento de API para 24 modelos.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="Qual IA entrega mais resultado pelo que custa?">
+  <meta property="og:description" content="Compare inteligência e custo de 24 modelos. Simule seu cenário, visualize a fronteira de eficiência e compartilhe a análise.">
+  <title>IA & Valor — Calculadora de capacidade × custo</title>
+  <style>
+    :root{--ink:#081b35;--ink2:#344761;--muted:#62748e;--line:#dfe7f0;--bg:#f5f8fc;--card:#fff;--orange:#f46c28;--blue:#2d64e7;--mint:#e5f8ef;--green:#057851;--shadow:0 16px 45px rgba(17,41,78,.07)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.48 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+    button,input,select{font:inherit}button{cursor:pointer}a{color:#174ead;text-decoration-thickness:1px;text-underline-offset:3px}a:hover{text-decoration:underline}
+    :focus-visible{outline:3px solid #f59d62;outline-offset:3px}button:disabled{opacity:.45;cursor:not-allowed}
+    .shell{max-width:1220px;margin:auto;padding:0 16px}.top{background:var(--ink);color:white}.nav{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:68px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:850;font-size:1.16rem;letter-spacing:-.03em}.brand-symbol{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:linear-gradient(130deg,var(--orange),#ffb267);color:#081b35;font-weight:950;font-size:.92rem}
+    .navlink{font-size:.86rem;color:#d8e6ff;text-decoration:none;padding:9px 12px;border:1px solid #446080;border-radius:999px;white-space:nowrap}
+    .hero{padding:35px 0 22px}.eyebrow{color:#e86a27;font-size:.72rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase}.hero h1{max-width:950px;margin:10px 0;font-size:clamp(2.1rem,6.5vw,4.75rem);line-height:1.07;letter-spacing:-.055em;font-weight:900}
+    .hero h1 em{font-style:normal;color:var(--orange)}.hero p{font-size:clamp(1rem,2vw,1.15rem);max-width:740px;color:var(--ink2);margin:16px 0}.notice{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;padding:12px 14px;background:#fff5e9;border:1px solid #ffe3c6;border-radius:13px;font-size:.81rem;color:#6b4420}.notice b{color:#9d4b0d}
+    .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:19px 0}.kpi{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:15px;min-height:102px}.kpi:last-child{grid-column:1/-1}
+    .kpi small{font-size:.75rem;color:var(--muted);font-weight:700}.kpi strong{display:block;font-size:clamp(1.25rem,3.4vw,1.9rem);font-weight:850;line-height:1.23;letter-spacing:-.035em;margin:5px 0}.kpi span{display:block;color:var(--muted);font-size:.74rem}
+    .workspace{display:grid;gap:15px;margin:20px 0 28px}.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:19px;min-width:0}
+    h2{font-size:1.15rem;letter-spacing:-.025em;line-height:1.2;margin:0 0 8px}h3{margin:0;font-size:1rem}p{margin:7px 0}.sub{color:var(--muted);font-size:.84rem}.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+    .pill{background:#e8efff;color:#164db2;border:1px solid #d2e0ff;border-radius:999px;padding:5px 9px;font-size:.72rem;font-weight:800;white-space:nowrap}
+    .form-item{display:block;margin:18px 0 0}.form-item label,.fieldlabel{display:block;font-size:.83rem;font-weight:800;margin-bottom:6px}
+    .form-item input,.search,.sorter{width:100%;border:1px solid #cdd9e6;border-radius:12px;background:#fff;color:var(--ink);min-height:49px;padding:10px 13px}
+    .form-item input:focus,.search:focus,.sorter:focus{outline:3px solid #d7e6ff;border-color:#557dca}
+    .hint{display:block;font-size:.72rem;color:var(--muted);margin-top:5px}
+    .row-two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.row-two .form-item{min-width:0}
+    input[type=range]{accent-color:var(--blue);width:100%;min-height:28px;padding:0;border:0}
+    .range-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.range-head strong{font-size:1.2rem;color:#0d56ce}
+    .seg{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:5px;background:#f0f4fa;border-radius:13px;margin-top:10px}
+    .seg button{min-height:44px;background:transparent;border:0;border-radius:9px;font-weight:750;font-size:.79rem;padding:8px;color:#49607b}
+    .seg button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 2px 7px #1a2b401b}
+    .micro{background:#f5f8fe;border:1px solid #dbe6f3;padding:12px;border-radius:12px;font-size:.75rem;color:#4c6481;margin-top:14px}
+    .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}.btn{border:0;border-radius:11px;padding:11px 14px;font-weight:800;min-height:44px;transition:transform .15s,background .15s}.btn:active{transform:scale(.98)}
+    .primary{background:var(--ink);color:#fff}.primary:hover{background:#1b3761}.secondary{background:#edf2f8;color:var(--ink)}.secondary:hover{background:#e0eaf6}
+    .chart-scroll{overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;border:1px solid #e4edf7;background:linear-gradient(135deg,#fff,#f9fbfe);border-radius:13px}
+    #chart{display:block;width:100%;min-width:675px;height:auto;touch-action:pan-x}.chart-note{font-size:.74rem;color:var(--muted);margin-top:9px}
+    .legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;color:var(--ink2);font-size:.75rem}.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:5px}.dot.selected{background:var(--orange)}.dot.normal{background:#477ee6}.line-icon{display:inline-block;width:16px;height:0;border-top:3px dashed #16936e;vertical-align:middle;margin-right:5px}
+    .spotlight{background:linear-gradient(115deg,#092042,#17396a);color:white;border:0}.spotlight .sub{color:#c2d6f2}.spotlight .pill{background:#294a79;color:#d1e8ff;border-color:#3a5d91}.spotlight strong{font-size:1.35rem;display:block;margin:9px 0;color:#fff}.spotlight p{color:#d4e4ff;font-size:.86rem}.spotlight .highlight{color:#ffc08b;font-weight:900}
+    .list-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:12px 0 14px}.list-actions>*{min-width:0}.list-actions label{font-size:.73rem;display:block;font-weight:800;color:var(--muted);margin-bottom:5px}
+    .model-list{display:grid;gap:9px}.model{display:grid;grid-template-columns:1fr auto;gap:9px 12px;padding:13px;border:1px solid #dde7f2;border-radius:14px;background:#fff}.model.picked{border-color:#f79c60;background:#fffaf5}
+    .model h3{font-size:.92rem;letter-spacing:-.017em;margin:0}.model .org{font-size:.73rem;color:var(--muted);margin-top:2px}.model .values{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    .model .values span{font-size:.76rem;color:#53637a}.model .values b{color:var(--ink);font-weight:850}.model .price{text-align:right;font-size:1rem;font-weight:850;letter-spacing:-.02em;white-space:nowrap}
+    .pick{background:#ecf2ff;color:#164aae;border:1px solid #dae6ff;border-radius:10px;font-weight:800;min-height:40px;padding:8px 11px;font-size:.76rem}.pick[aria-pressed=true]{background:#fff1e7;color:#b94c14;border-color:#f9cba9}
+    .model .mini-tag{font-size:.67rem;color:var(--green);font-weight:800;margin-top:6px}
+    .compare-grid{display:grid;gap:9px}.compare-item{border:1px solid #e1e9f3;border-radius:14px;padding:13px;background:#fbfdff}
+    .compare-item strong{display:block;font-size:1rem}.compare-item .vendor{font-size:.73rem;color:var(--muted)}
+    .compare-item .bignum{font-weight:900;font-size:1.32rem;margin:8px 0 3px}.compare-item .detail{color:var(--muted);font-size:.77rem}
+    .compare-summary{padding:13px;border-radius:13px;background:var(--mint);color:#075e45;margin-top:12px;font-size:.84rem}
+    .method{font-size:.78rem;color:var(--ink2)}.method h2{margin-bottom:13px}.method details{border-top:1px solid var(--line);padding:12px 0}.method summary{cursor:pointer;font-weight:800}.method p{margin:9px 0}.foot{padding:22px 0 40px;font-size:.75rem;color:var(--muted)}
+    .toast{position:fixed;z-index:20;bottom:calc(17px + env(safe-area-inset-bottom));left:50%;transform:translate(-50%,16px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;background:#0d2645;color:white;border-radius:99px;padding:12px 18px;box-shadow:0 10px 30px #07172a4d;text-align:center;max-width:92vw;font-size:.83rem}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(min-width:680px){.shell{padding:0 28px}.hero{padding-top:49px}.kpis{grid-template-columns:repeat(3,1fr);gap:14px}.kpi:last-child{grid-column:auto}.compare-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.panel{padding:23px}.list-actions{grid-template-columns:minmax(0,1fr) 200px}}
+    @media(min-width:1000px){.workspace{grid-template-columns:310px minmax(0,1fr);align-items:start;gap:18px}.sidebar{position:sticky;top:16px}.content{display:grid;gap:16px}.hero{padding-bottom:29px}.nav{min-height:77px}.kpi{min-height:110px}.model-list{grid-template-columns:1fr 1fr}}
+    @media(max-width:420px){.shell{padding:0 13px}.hero{padding-top:28px}.hero h1{font-size:2.15rem}.panel{padding:15px;border-radius:16px}.kpis{gap:8px}.kpi{padding:12px}.kpi strong{font-size:1.19rem}.navlink{font-size:.75rem;padding:7px 9px}.model .price{font-size:.89rem}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+  </style>
+</head>
+<body>
+<header class="top"><div class="shell nav"><div class="brand"><span class="brand-symbol" aria-hidden="true">IA</span><span>IA <span style="color:#fcb480">&</span> Valor</span></div><a class="navlink" href="https://github.com/amnsalomon/calculadora" target="_blank" rel="noopener noreferrer">Projeto aberto ↗</a></div></header>
+<main class="shell">
+  <section class="hero" aria-labelledby="main-title">
+    <div class="eyebrow">Inteligência artificial para decisões de negócio</div>
+    <h1 id="main-title">Qual IA entrega <em>mais resultado</em> pelo que custa?</h1>
+    <p>Compare a capacidade de 24 modelos com seu custo. Ajuste seu volume de uso, encontre opções para seu nível de exigência e tome uma decisão mais inteligente.</p>
+    <div class="notice"><b>Dados históricos e transparentes</b><span>Índice Artificial Analysis v4.3.2 e preços observados em 15/10/2026, alinhados ao gráfico do post. A <a href="https://artificialanalysis.ai/pt/articles/artificial-analysis-intelligence-index-v5" target="_blank" rel="noopener noreferrer">versão v5 saiu em 27/10</a>; não compare pontuações de versões diferentes.</span></div>
+  </section>
+  <section class="kpis" aria-label="Visão rápida">
+    <div class="kpi"><small>Mais econômico no seu filtro</small><strong id="kpi-cheapest">—</strong><span id="kpi-cheapest-sub">—</span></div>
+    <div class="kpi"><small>Maior índice no seu filtro</small><strong id="kpi-smartest">—</strong><span id="kpi-smartest-sub">—</span></div>
+    <div class="kpi"><small>Modelos que atendem ao filtro</small><strong id="kpi-count">—</strong><span>De 24 opções da mesma referência</span></div>
+  </section>
+  <div class="workspace">
+    <aside class="sidebar">
+      <section class="panel" aria-labelledby="config-title">
+        <div class="panel-head"><div><h2 id="config-title">Monte seu cenário</h2><p class="sub">Altere os números e veja tudo mudar.</p></div><span class="pill">100% grátis</span></div>
+        <div class="form-item"><label for="calls">Chamadas de API por mês</label><input id="calls" type="number" inputmode="numeric" min="1" max="100000000" step="100" value="10000"><span class="hint">Ex.: 10.000 perguntas ou execuções mensais.</span></div>
+        <div class="row-two">
+          <div class="form-item"><label for="inputTokens">Tokens de entrada por chamada</label><input id="inputTokens" type="number" inputmode="numeric" min="1" max="1000000" step="100" value="2000"></div>
+          <div class="form-item"><label for="outputTokens">Tokens de saída por chamada</label><input id="outputTokens" type="number" inputmode="numeric" min="1" max="1000000" step="100" value="500"></div>
+        </div>
+        <div class="form-item"><div class="range-head"><label for="minScore">Capacidade mínima desejada</label><strong id="scoreValue">45</strong></div><input id="minScore" type="range" min="15" max="58" value="45" step="1"><span class="hint">Pontos no Intelligence Index v4.3.2; não são porcentagens.</span></div>
+        <div class="form-item"><span class="fieldlabel">Como comparar no gráfico?</span><div class="seg" role="group" aria-label="Métrica de custo"><button type="button" id="metric-api" aria-pressed="true">Seu gasto mensal</button><button type="button" id="metric-bench" aria-pressed="false">Custo do benchmark</button></div></div>
+        <div class="micro" id="metric-description">O gasto mensal é uma estimativa por volume × preços de entrada e saída da API. Não representa o custo do benchmark nem inclui ferramentas, cache ou cobrança especial.</div>
+        <div class="actions"><button type="button" id="share" class="btn primary">↗ Compartilhar cenário</button><button type="button" id="reset" class="btn secondary">Restaurar</button></div>
+      </section>
+    </aside>
+    <div class="content">
+      <section class="panel" aria-labelledby="chart-title">
+        <div class="panel-head"><div><h2 id="chart-title">Capacidade × custo</h2><p class="sub" id="chart-sub">Mais alto significa maior índice; mais à esquerda significa menor custo.</p></div><span class="pill">Gráfico interativo</span></div>
+        <div class="chart-scroll" tabindex="0" aria-label="Gráfico rolável horizontalmente em telas pequenas"><svg id="chart" viewBox="0 0 800 450" role="img" aria-label="Dispersão de modelos de IA por índice de inteligência e custo"></svg></div>
+        <div class="legend"><span><i class="dot normal"></i>Modelo</span><span><i class="dot selected"></i>Selecionado</span><span><i class="line-icon"></i>Fronteira eficiente</span></div>
+        <p class="chart-note">No celular, deslize o gráfico para explorar. Toque em um ponto para adicionar ou remover modelos da comparação (máximo 3). A escala de custos é logarítmica.</p>
+      </section>
+      <section class="panel spotlight" aria-live="polite"><div class="panel-head"><h2>Oportunidade para o seu negócio</h2><span class="pill">Análise dinâmica</span></div><strong id="opportunity-title">—</strong><p id="opportunity-description">—</p></section>
+      <section class="panel" aria-labelledby="list-title">
+        <div class="panel-head"><div><h2 id="list-title">Explore os modelos</h2><p class="sub">Defina uma capacidade mínima e escolha até 3 para comparar.</p></div><span class="pill" id="list-count">24 modelos</span></div>
+        <div class="list-actions">
+          <div><label for="search">Buscar modelo ou empresa</label><input class="search" id="search" type="search" placeholder="Ex.: GPT, Claude, Gemini..."></div>
+          <div><label for="sort">Ordenar por</label><select class="sorter" id="sort"><option value="cost">Menor custo</option><option value="score">Maior capacidade</option><option value="name">Nome A–Z</option></select></div>
+        </div>
+        <div id="models" class="model-list" aria-live="polite"></div>
+        <p class="chart-note">O filtro de capacidade é baseado em benchmark geral: para contratar, valide com testes reais de qualidade, velocidade e segurança.</p>
+      </section>
+      <section class="panel" aria-labelledby="compare-title"><div class="panel-head"><div><h2 id="compare-title">Comparação lado a lado</h2><p class="sub">Até 3 modelos, com o mesmo cenário.</p></div><span class="pill" id="selected-count">0/3</span></div><div class="compare-grid" id="compare"></div><div class="compare-summary" id="compare-summary"></div></section>
+      <section class="panel method" aria-labelledby="method-title">
+        <h2 id="method-title">Como interpretar os números</h2>
+        <details open><summary>Simulação mensal de API</summary><p><b>Custo estimado (US$)</b> = chamadas por mês × [(tokens de entrada × preço de entrada por milhão) + (tokens de saída × preço de saída por milhão)] ÷ 1.000.000. É um cenário ilustrativo, não cotação ou fatura. Cache, processamento multimodal, ferramentas, lotes, faixas de contexto e tokens internos de raciocínio podem mudar o total. Tokens de raciocínio faturados como saída precisam estar incluídos na estimativa de saída.</p></details>
+        <details><summary>O que o índice de inteligência mede?</summary><p>É uma pontuação agregada de testes padronizados do Artificial Analysis (v4.3.2 nesta base). Ela representa desempenho geral do benchmark, não probabilidade de acerto, ROI ou qualidade garantida para a tarefa da sua empresa. A versão v5, publicada em 27/10/2026, usa metodologia diferente.</p></details>
+        <details><summary>Diferença entre custo de API e custo por tarefa</summary><p>O <b>custo por tarefa do benchmark</b> é a média ponderada que o Artificial Analysis mediu para executar seus próprios testes. Não é preço unitário por token e não deve ser multiplicado pelas tarefas reais da sua empresa como previsão de fatura. O modo “Seu gasto mensal” usa os preços de entrada/saída informados nesta base e o volume preenchido por você.</p></details>
+        <details><summary>O que é a fronteira eficiente?</summary><p>São os modelos para os quais nenhum outro na mesma amostra oferece ao mesmo tempo índice igual ou maior com custo igual ou menor (com pelo menos uma vantagem estrita). A fronteira é recalculada conforme a métrica de custo escolhida.</p></details>
+        <details><summary>Fontes, data e limitações</summary><p>Dados de modelo (24 configurações, preços de API e custo por tarefa): <a href="https://researchcollabtech.com/aichart/" target="_blank" rel="noopener noreferrer">ResearchCollab, leitura de 15/10/2026</a>, a partir do <a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener noreferrer">Artificial Analysis</a>. <a href="https://artificialanalysis.ai/pt/articles/artificial-analysis-intelligence-index-v5" target="_blank" rel="noopener noreferrer">Nova metodologia v5 (27/10/2026)</a>. Os preços dependem de provedor, região, modalidade e regras comerciais e podem ter mudado. O app não atualiza automaticamente e não envia os dados preenchidos a servidores. Confira sempre a tabela oficial da API antes de contratar.</p></details>
+      </section>
+    </div>
+  </div>
+</main>
+<footer class="shell foot"><b>IA & Valor</b> · Uma ferramenta gratuita para decisões mais informadas. Sem cadastro e sem rastreamento. Não é afiliada aos fornecedores citados. · <a href="https://github.com/amnsalomon/calculadora" target="_blank" rel="noopener noreferrer">Código aberto</a></footer>
+<div role="status" aria-live="polite" class="toast" id="toast"></div>
+<script>
+(function(){
+  "use strict";
+  // Snapshot único: Artificial Analysis Intelligence Index v4.3.2, 15/10/2026.
+  // id, nome, provedor, score, custoBenchmarkUSD, preçoEntrada/M, preçoSaída/M, contexto(K).
+  const rows=[
+    ["opus","Claude Opus 5.5 (max)","Anthropic",57.6,5.98,4,20,1000],
+    ["sonnet","Claude Sonnet 5.5 (max)","Anthropic",56.0,5.46,2,10,1000],
+    ["fable","Claude Fable 5.1 (max)","Anthropic",53.4,7.63,10,50,1000],
+    ["astra","GPT-6 Astra (max)","OpenAI",52.7,3.26,10,50,1000],
+    ["argon","Gemini 4 Argon (high)","Google",52.6,1.99,2,10,1000],
+    ["muse-wonder","Muse Wonder (max)","Meta",52.4,4.52,4,20,1049],
+    ["sol","GPT-6.1 Sol (max)","OpenAI",51.8,.72,2,10,1000],
+    ["muse-spark","Muse Spark 1.3 (max)","Meta",48.1,1.60,1.25,4.25,1000],
+    ["grok","Grok 4.7 (xhigh)","SpaceXAI",46.4,3.74,2,6,500],
+    ["mimo","MiMo-V2.6-Pro","Xiaomi",46.3,.13,.435,.87,1000],
+    ["qwen-max","Qwen3.8 Max (0902)","Alibaba",45.4,5.41,2,6,984],
+    ["glm","GLM-5.3 (max)","Z AI",44.8,2.01,1.4,4.4,1000],
+    ["step","Step 5 Preview","StepFun",43.7,1.03,1,2.7,1000],
+    ["kimi","Kimi K3 (max)","Kimi",43.6,2,3,15,1049],
+    ["haiku","Claude Haiku 5.5 (max)","Anthropic",43.4,.21,.1,.5,1000],
+    ["glm-flash","GLM-5.3-Flash","Z AI",41.8,.28,.15,.5,1000],
+    ["flash","Gemini 3.8 Flash (high)","Google",40.9,1.24,.75,3.75,1000],
+    ["deepseek","DeepSeek V4.1 Flash (max)","DeepSeek",39.5,.27,.3,1.2,1000],
+    ["mistral-large","Mistral Large 4 Preview","Mistral",38.4,1.13,1.36,4.18,524],
+    ["luna","GPT-6 Luna (max)","OpenAI",38.1,.0678,.1,.5,1000],
+    ["qwen27","Qwen3.8 27B (xhigh)","Alibaba",33.7,1.01,.5,3,256],
+    ["minimax","MiniMax-M3","MiniMax",29.2,.51,.3,1.2,1000],
+    ["nemotron","Nemotron 3 Ultra","NVIDIA",22.9,.6,.6,2.5,262],
+    ["glimmer","Muse Glimmer (high)","Meta",17.5,.0535,.3,1.2,131]
+  ];
+  const models=rows.map(r=>({id:r[0],name:r[1],org:r[2],score:r[3],benchmark:r[4],input:r[5],output:r[6],context:r[7]}));
+  const $=id=>document.getElementById(id);
+  const dollars=new Intl.NumberFormat("pt-BR",{style:"currency",currency:"USD",minimumFractionDigits:2,maximumFractionDigits:2});
+  const nfmt=new Intl.NumberFormat("pt-BR",{maximumFractionDigits:1});
+  const state={metric:"api",selected:["sol","opus","mimo"],sort:"cost",search:""};
+  let toastTimeout;
+  const clean=(v,min,max,defaultVal)=>{const x=Number(v);return Number.isFinite(x)&&x>=min?Math.min(x,max):defaultVal};
+  const params=new URLSearchParams(location.search);
+  function restoreFromUrl(){
+    const keys=[["calls",1,100000000],["inputTokens",1,1000000],["outputTokens",1,1000000],["minScore",15,58]];
+    for(const [key,min,max] of keys){if(params.has(key))$(key).value=clean(params.get(key),min,max,Number($(key).value));}
+    if(params.get("metric")==="bench")state.metric="bench";
+    if(params.has("models")){const valid=params.get("models").split(",").filter(id=>models.some(m=>m.id===id));if(valid.length&&valid.length<=3)state.selected=[...new Set(valid)];}
+  }
+  function config(){
+    return {calls:clean($("calls").value,1,100000000,10000),inTokens:clean($("inputTokens").value,1,1000000,2000),outTokens:clean($("outputTokens").value,1,1000000,500),minScore:clean($("minScore").value,15,58,45)};
+  }
+  function estimate(m,c){return c.calls*(c.inTokens*m.input+c.outTokens*m.output)/1000000;}
+  function price(m,c){return state.metric==="api"?estimate(m,c):m.benchmark;}
+  function money(value){return dollars.format(value);}
+  function shortMoney(value){return value>=1000000?"US$ "+nfmt.format(value/1000000)+" mi":value>=10000?"US$ "+nfmt.format(value/1000)+" mil":money(value);}
+  function frontier(c){
+    const ordered=[...models].sort((a,b)=>price(a,c)-price(b,c)||b.score-a.score);
+    let max=-Infinity;
+    return ordered.filter(m=>{if(m.score>max){max=m.score;return true;}return false;});
+  }
+  function filtered(c){
+    const q=state.search.toLocaleLowerCase("pt-BR").trim();
+    return models.filter(m=>m.score>=c.minScore&&(!q||(m.name+" "+m.org).toLocaleLowerCase("pt-BR").includes(q)));
+  }
+  function sorted(items,c){return [...items].sort((a,b)=>state.sort==="score"?b.score-a.score||price(a,c)-price(b,c):state.sort==="name"?a.name.localeCompare(b.name,"pt-BR"):price(a,c)-price(b,c)||b.score-a.score);}
+  function showToast(message){const t=$("toast");t.textContent=message;t.classList.add("show");clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>t.classList.remove("show"),3000);}
+  function toggle(id){if(state.selected.includes(id)){if(state.selected.length===1){showToast("Mantenha pelo menos um modelo selecionado.");return;}state.selected=state.selected.filter(x=>x!==id);}else if(state.selected.length>=3){showToast("Você pode comparar até 3 modelos. Remova um antes.");return;}else state.selected.push(id);render();}
+  function svgEl(tag,attrs,text){const el=document.createElementNS("http://www.w3.org/2000/svg",tag);if(attrs)for(const [k,v] of Object.entries(attrs))el.setAttribute(k,v);if(text!==undefined)el.textContent=text;return el;}
+  function paint(c,visible,front){
+    const root=$("chart");root.replaceChildren();
+    const W=800,H=450,L=79,R=26,T=28,B=82,plotW=W-L-R,plotH=H-T-B;
+    const xs=models.map(m=>Math.max(.0000001,price(m,c))),minX=Math.max(.00000001,Math.min(...xs)/1.8),maxX=Math.max(...xs)*1.8;
+    const xmin=Math.log10(minX),xmax=Math.log10(maxX);
+    const x=v=>L+(Math.log10(Math.max(v,.00000001))-xmin)/(xmax-xmin)*plotW;
+    const y=v=>T+(64-v)/(64-10)*plotH;
+    root.appendChild(svgEl("rect",{x:L,y:T,width:plotW,height:plotH,rx:8,fill:"#f8fbff"}));
+    for(const s of [20,30,40,50,60]){
+      const py=y(s);root.appendChild(svgEl("line",{x1:L,y1:py,x2:W-R,y2:py,stroke:"#dbe6f1"}));root.appendChild(svgEl("text",{x:L-12,y:py+4,"text-anchor":"end",fill:"#63738b","font-size":13},String(s)));
+    }
+    for(let p=Math.floor(xmin);p<=Math.ceil(xmax);p++){
+      for(const mul of [1,2,5]){
+        const val=mul*Math.pow(10,p),px=x(val);if(px<L+4||px>W-R-4)continue;
+        if(mul===1)root.appendChild(svgEl("line",{x1:px,y1:T,x2:px,y2:H-B,stroke:"#e1e9f3"}));
+        const label=val>=1000?nfmt.format(val/1000)+" mil":val>=1?nfmt.format(val):val>=.01?nfmt.format(val):val.toFixed(3).replace(".",",");
+        if(mul===1)root.appendChild(svgEl("text",{x:px,y:H-B+22,"text-anchor":"middle",fill:"#63738b","font-size":12},label));
+      }
+    }
+    root.appendChild(svgEl("text",{x:L,y:17,fill:"#17375c","font-size":13,"font-weight":800},"INTELIGÊNCIA ↑"));
+    root.appendChild(svgEl("text",{x:L+plotW/2,y:H-24,"text-anchor":"middle",fill:"#17375c","font-size":14,"font-weight":800},state.metric==="api"?"GASTO MENSAL ESTIMADO (US$) →":"CUSTO POR TAREFA DO BENCHMARK (US$) →"));
+    root.appendChild(svgEl("text",{x:L+plotW/2,y:H-6,"text-anchor":"middle",fill:"#6b7e98","font-size":11},"Menor custo à esquerda · escala logarítmica"));
+    if(front.length>1){const path=front.map((m,i)=>(i?"L":"M")+x(price(m,c)).toFixed(1)+" "+y(m.score).toFixed(1)).join(" ");root.appendChild(svgEl("path",{d:path,fill:"none",stroke:"#15916d","stroke-width":3,"stroke-dasharray":"6 5","stroke-linecap":"round"}));}
+    const ids=new Set(visible.map(m=>m.id));
+    const drawn=[...models].sort((a,b)=>Number(state.selected.includes(a.id))-Number(state.selected.includes(b.id)));
+    for(const m of drawn){
+      const chosen=state.selected.includes(m.id),on=ids.has(m.id),cx=x(price(m,c)),cy=y(m.score);
+      const g=svgEl("g",{tabindex:"0",role:"button","aria-label":m.name+", índice "+m.score+", custo "+money(price(m,c))+", "+(chosen?"remover":"selecionar"),style:"cursor:pointer"});
+      if(chosen)g.appendChild(svgEl("circle",{cx,cy,r:12,fill:"#fff",stroke:"#fb7b36","stroke-width":2.5}));
+      const dot=svgEl("circle",{cx,cy,r:chosen?7:on?5.5:4,fill:chosen?"#f46c28":on?"#3977dd":"#afbdce",opacity:on||chosen?1:.34,stroke:"#fff","stroke-width":1.2});
+      g.appendChild(dot);g.appendChild(svgEl("title",{},m.name+" · índice "+nfmt.format(m.score)+" · "+money(price(m,c))));
+      if(chosen){
+        const left=cx>W-215,top=cy<T+48;
+        const lx=left?cx-14:cx+14,ly=top?cy+25:cy-12;
+        g.appendChild(svgEl("text",{x:lx,y:ly,"text-anchor":left?"end":"start",fill:"#102a51","font-size":12,"font-weight":800,stroke:"#fff","stroke-width":3,"paint-order":"stroke"},m.name.split(" (")[0]));
+      }
+      g.addEventListener("click",()=>toggle(m.id));
+      g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();toggle(m.id);}});
+      root.appendChild(g);
+    }
+    root.setAttribute("aria-label","Gráfico de dispersão: "+visible.length+" modelos no filtro, eixo vertical inteligência e eixo horizontal "+(state.metric==="api"?"custo mensal estimado":"custo médio do benchmark")+". Toque nos pontos para selecionar.");
+  }
+  function renderList(c,visible,front){
+    const wrap=$("models");wrap.replaceChildren();const ids=new Set(front.map(m=>m.id));
+    $("list-count").textContent=visible.length+" modelos";
+    for(const m of sorted(visible,c)){
+      const article=document.createElement("article");article.className="model"+(state.selected.includes(m.id)?" picked":"");
+      const info=document.createElement("div");
+      const title=document.createElement("h3");title.textContent=m.name;info.appendChild(title);
+      const org=document.createElement("div");org.className="org";org.textContent=m.org;info.appendChild(org);
+      const values=document.createElement("div");values.className="values";
+      const p1=document.createElement("span");p1.innerHTML="<b>Índice</b> "+nfmt.format(m.score);
+      const p2=document.createElement("span");p2.innerHTML="<b>API</b> "+money(m.input)+"/M entrada · "+money(m.output)+"/M saída";
+      values.append(p1,p2);info.appendChild(values);
+      if(ids.has(m.id)){const tag=document.createElement("div");tag.className="mini-tag";tag.textContent="✓ Na fronteira eficiente deste cenário";info.appendChild(tag);}
+      const right=document.createElement("div");right.style.textAlign="right";
+      const amount=document.createElement("div");amount.className="price";amount.textContent=shortMoney(price(m,c));right.appendChild(amount);
+      const pick=document.createElement("button");pick.className="pick";pick.type="button";pick.setAttribute("aria-pressed",state.selected.includes(m.id)?"true":"false");pick.textContent=state.selected.includes(m.id)?"✓ Comparando":"+ Comparar";pick.setAttribute("aria-label",(state.selected.includes(m.id)?"Remover ":"Comparar ")+m.name);pick.addEventListener("click",()=>toggle(m.id));right.appendChild(pick);
+      article.append(info,right);wrap.appendChild(article);
+    }
+    if(!visible.length){const empty=document.createElement("p");empty.className="sub";empty.textContent="Nenhum modelo combina com a busca e capacidade mínima. Tente reduzir o filtro.";wrap.appendChild(empty);}
+  }
+  function renderCompare(c){
+    const items=state.selected.map(id=>models.find(m=>m.id===id)).filter(Boolean),grid=$("compare");grid.replaceChildren();
+    $("selected-count").textContent=items.length+"/3";
+    items.forEach(m=>{
+      const item=document.createElement("article");item.className="compare-item";
+      const title=document.createElement("strong");title.textContent=m.name;const vendor=document.createElement("div");vendor.className="vendor";vendor.textContent=m.org+" · contexto "+nfmt.format(m.context)+" mil tokens";
+      const amount=document.createElement("div");amount.className="bignum";amount.textContent=shortMoney(price(m,c));
+      const detail=document.createElement("div");detail.className="detail";detail.textContent=(state.metric==="api"?"Total mensal estimado":"Por tarefa de benchmark")+" · índice "+nfmt.format(m.score);
+      const t=document.createElement("div");t.className="detail";t.textContent="API: "+money(m.input)+"/M entrada · "+money(m.output)+"/M saída";
+      item.append(title,vendor,amount,detail,t);grid.appendChild(item);
+    });
+    const ordered=items.slice().sort((a,b)=>price(a,c)-price(b,c));
+    if(ordered.length>1){
+      const lo=ordered[0],hi=ordered[ordered.length-1],pct=(1-price(lo,c)/price(hi,c))*100;
+      $("compare-summary").textContent=lo.name+" custa "+nfmt.format(pct)+"% menos que "+hi.name+" nesta métrica e neste cenário. Índices: "+nfmt.format(lo.score)+" vs. "+nfmt.format(hi.score)+". A economia potencial não implica resultados equivalentes.";
+    }else $("compare-summary").textContent="Selecione mais um modelo para enxergar a diferença de custo e capacidade.";
+  }
+  function render(){
+    const c=config();const visible=filtered(c),front=frontier(c),allEligible=models.filter(m=>m.score>=c.minScore);
+    $("scoreValue").textContent=nfmt.format(c.minScore);
+    $("metric-api").setAttribute("aria-pressed",String(state.metric==="api"));
+    $("metric-bench").setAttribute("aria-pressed",String(state.metric==="bench"));
+    $("metric-description").textContent=state.metric==="api"?"Estimativa mensal: chamadas × tokens de entrada/saída × tarifas de API. Exclui cache, ferramentas, eventuais tarifas especiais e tokens não previstos.":"Métrica de pesquisa: custo ponderado por tarefa do benchmark Artificial Analysis. Não é o custo esperado de uma tarefa da sua empresa.";
+    $("chart-sub").textContent=state.metric==="api"?"Capacidade do benchmark × gasto mensal estimado de API com os seus números.":"Capacidade × custo ponderado de uma tarefa do benchmark; não confundir com preço do token.";
+    const cheap=[...allEligible].sort((a,b)=>price(a,c)-price(b,c))[0];
+    const smart=[...allEligible].sort((a,b)=>b.score-a.score)[0];
+    $("kpi-cheapest").textContent=cheap?cheap.name.split(" (")[0]:"Nenhum";
+    $("kpi-cheapest-sub").textContent=cheap?shortMoney(price(cheap,c))+(state.metric==="api"?" / mês":" / benchmark"):"Reduza a capacidade mínima";
+    $("kpi-smartest").textContent=smart?smart.name.split(" (")[0]:"Nenhum";
+    $("kpi-smartest-sub").textContent=smart?"Índice "+nfmt.format(smart.score):"—";
+    $("kpi-count").textContent=String(allEligible.length)+" / 24";
+    if(cheap&&smart){$("opportunity-title").textContent="Com índice ≥ "+nfmt.format(c.minScore)+", o menor custo é "+cheap.name.split(" (")[0]+".";
+      $("opportunity-description").textContent="Neste cenário, "+cheap.name+" tem índice "+nfmt.format(cheap.score)+" e custo "+shortMoney(price(cheap,c))+(state.metric==="api"?" por mês.":" por tarefa do benchmark.")+" O maior índice disponível é "+nfmt.format(smart.score)+" ("+smart.name+"). A escolha depende da qualidade exigida no seu processo, não apenas do preço.";
+    }else{$("opportunity-title").textContent="Ajuste a exigência de capacidade.";$("opportunity-description").textContent="Não há modelos nesta faixa do índice.";}
+    paint(c,visible,front);renderList(c,visible,front);renderCompare(c);
+  }
+  function share(){
+    const c=config(),u=new URL(location.href);
+    u.search=new URLSearchParams({calls:String(c.calls),inputTokens:String(c.inTokens),outputTokens:String(c.outTokens),minScore:String(c.minScore),metric:state.metric,models:state.selected.join(",")}).toString();
+    const url=u.toString();
+    if(navigator.share){navigator.share({title:"IA & Valor — Meu cenário",text:"Compare capacidade e custo de modelos de IA",url}).catch(()=>{});}
+    else if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(url).then(()=>showToast("Link do seu cenário copiado!")).catch(()=>window.prompt("Copie este link:",url));}
+    else window.prompt("Copie este link:",url);
+  }
+  restoreFromUrl();
+  for(const id of ["calls","inputTokens","outputTokens","minScore"]){$(id).addEventListener("input",render);$(id).addEventListener("change",render);}
+  $("search").addEventListener("input",e=>{state.search=e.target.value;render();});
+  $("sort").addEventListener("change",e=>{state.sort=e.target.value;render();});
+  $("metric-api").addEventListener("click",()=>{state.metric="api";render();});
+  $("metric-bench").addEventListener("click",()=>{state.metric="bench";render();});
+  $("share").addEventListener("click",share);
+  $("reset").addEventListener("click",()=>{
+    $("calls").value="10000";$("inputTokens").value="2000";$("outputTokens").value="500";$("minScore").value="45";$("search").value="";$("sort").value="cost";
+    state.metric="api";state.selected=["sol","opus","mimo"];state.search="";state.sort="cost";history.replaceState(null,"",location.pathname);render();showToast("Cenário restaurado.");
+  });
+  render();
+})();
+</script>
+</body>
+</html>
